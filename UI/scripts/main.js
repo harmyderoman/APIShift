@@ -3,6 +3,19 @@ window.app = new Vue({
   router: new VueRouter({
     routes: []
   }),
+  vuetify: new Vuetify({
+    theme: {
+      dark: false,
+      themes: {
+        dark: {
+          primary: "#a8daff"
+        },
+        light: {
+          primary: "#003060"
+        }
+      }
+    }
+  }),
   data: {
     // System alerts
     alerts: [],
@@ -32,8 +45,12 @@ window.app = new Vue({
     APIShift.Loader.load((resolve, reject) => {
       app.app_notifications = APIShift.API.getComponent("notifications")
       app.pages.push({
-        path: "/main",
-        component: APIShift.API.getPage("main", true)
+        path: "/",
+        component: APIShift.API.getPage("home", true)
+      })
+      app.pages.push({
+        path: "/menu",
+        component: APIShift.API.getPage("menu", true)
       })
       resolve(0)
     })
