@@ -5,8 +5,9 @@
 
       <v-toolbar-title>Conditory</v-toolbar-title>
       <template v-slot:extension>
-        <v-toolbar-item><v-btn>Home</v-btn></v-toolbar-item>
-        <v-toolbar-item><v-btn>Menu</v-btn></v-toolbar-item>
+        <v-toolbar-item v-for="tab in tabs" :key="tab.name">
+          <v-btn :to="tab.path">{{ tab.name }}</v-btn>
+        </v-toolbar-item>
       </template>
 
       <v-spacer></v-spacer>
@@ -20,25 +21,16 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
-            <v-list-item-title>Home</v-list-item-title>
+          <v-list-item v-for="path in paths" :key="path.name">
+            <v-list-item-title>
+              <v-btn :to="path.path">{{ path.name }}</v-btn>
+            </v-list-item-title>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Menu</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Cart</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title
-              ><a href="/control">Control Panel</a></v-list-item-title
-            >
+            <v-list-item-title>
+              <v-btn href="/control">Control Panel</v-btn>
+            </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -59,6 +51,12 @@
     computed: {
       isDarkTheme() {
         return window.app.$vuetify.theme.dark
+      },
+      paths() {
+        return window.app.paths
+      },
+      tabs() {
+        return this.paths.filter((item) => item.tab)
       }
     },
 

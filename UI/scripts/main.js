@@ -28,7 +28,39 @@ window.app = new Vue({
     app_footer: {},
     app_notifications: {},
     pages: [],
-    apishift: null
+    apishift: null,
+    paths: [
+      {
+        name: "Home",
+        path: "/",
+        component: "home",
+        tab: true
+      },
+      {
+        name: "Menu",
+        path: "/menu",
+        component: "menu",
+        tab: true
+      },
+      {
+        name: "Cart",
+        path: "/cart",
+        component: "cart",
+        tab: false
+      },
+      {
+        name: "Account",
+        path: "/account",
+        component: "account",
+        tab: false
+      },
+      {
+        name: "Edit menu",
+        path: "/edit-menu",
+        component: "edit",
+        tab: true
+      }
+    ]
   },
   created() {
     this.apishift = new APIShift()
@@ -44,13 +76,12 @@ window.app = new Vue({
 
     APIShift.Loader.load((resolve, reject) => {
       app.app_notifications = APIShift.API.getComponent("notifications")
-      app.pages.push({
-        path: "/",
-        component: APIShift.API.getPage("home", true)
-      })
-      app.pages.push({
-        path: "/menu",
-        component: APIShift.API.getPage("menu", true)
+
+      this.paths.forEach((item) => {
+        app.pages.push({
+          path: item.path,
+          component: APIShift.API.getPage(item.component, true)
+        })
       })
       resolve(0)
     })
