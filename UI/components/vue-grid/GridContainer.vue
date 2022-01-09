@@ -1,5 +1,9 @@
 <template>
-  <div class="grid-container" :class="{ 'centered-items': centered }">
+  <div
+    :style="gridStyles"
+    class="grid-container"
+    :class="{ 'centered-items': centered }"
+  >
     <slot></slot>
   </div>
 </template>
@@ -9,7 +13,25 @@
     props: {
       centered: {
         type: Boolean,
-        required: false
+        required: false,
+        default: true
+      },
+      itemWidth: {
+        type: String,
+        required: true
+      },
+      gap: {
+        type: Number,
+        required: false,
+        default: 0
+      }
+    },
+    computed: {
+      gridStyles() {
+        return {
+          "grid-template-columns": `repeat(auto-fill, minmax(${this.itemWidth}, 1fr))`,
+          gap: this.gap
+        }
       }
     }
   }
@@ -17,9 +39,7 @@
 
 <style scoped>
   .grid-container {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     display: grid;
-    gap: 1rem;
   }
   .centered-items {
     justify-items: center;

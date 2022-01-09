@@ -43,18 +43,34 @@
     data() {
       return {
         group: null,
+        /**
+         * Shows drawer
+         * @param {boolean}
+         */
         drawer: false,
         toolbarImageSrc:
           "https://64.media.tumblr.com/c382f41340942888ec22a3c6a76d19ab/tumblr_odzsg8FOoi1ul5fqko1_1280.png"
       }
     },
     computed: {
+      /**
+       * Return Boolean if the theme is dark
+       * @returns {boolean}
+       */
       isDarkTheme() {
         return window.app.$vuetify.theme.dark
       },
+      /**
+       * Return array of routes frpm global object
+       * @returns {Array<{ path: string, name: string, id: number }>}
+       */
       paths() {
         return window.app.paths
       },
+      /**
+       * Filtred tabs that its property tab is true
+       * @returns {Array<{ path: string, name: string, id: number }>}
+       */
       tabs() {
         return this.paths.filter((item) => item.tab)
       }

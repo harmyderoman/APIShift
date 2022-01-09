@@ -11,6 +11,7 @@
       }
     },
     created() {
+      // https://food.allwomenstalk.com/you-need-to-try-these-delicious-desserts-from-around-the-world/
       app.apishift.setSubtitle("Menu")
 
       APIShift.API.request(
@@ -25,7 +26,7 @@
 
 <template>
   <v-main>
-    <grid-container centered>
+    <grid-container class="padding" centered item-width="400px" gap="1rem">
       <v-card
         v-for="item in desserts"
         :key="item.id"
@@ -62,4 +63,7 @@
 
 <style>
   /* Please style this crap, with style */
+  .padding {
+    padding: 20px;
+  }
 </style>
